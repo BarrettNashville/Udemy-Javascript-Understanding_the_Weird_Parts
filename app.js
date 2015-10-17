@@ -1,31 +1,18 @@
-//How can coersion be useful? Use these only in console.
-
-Boolean(undefined)
-//false
-
-Boolean(null)
-//false
-
-Boolean("")
-//false
-
-// Useful example:
-
-var a;
-
-// goes to the Internet and looks for a value
-
-if(a) {
-    console.log('Something is here');
+function greet(name) {
+    console.log('Hello ' + name);
 }
 
-//
+greet('Barrett');
+greet(); // outputs Hello undefined
 
-Boolean(0)
-//false
+//ES6 allows you to set a default value. But old code uses this trick:
 
-//If there is any chance the variable can become a 0, don't use this method. If that is the case though, you could use this if statement:
-
-if(a || a === 0) {
-    console.log('Something is here');
+function greet(name) {
+    name = name || '<Your name here>'; // this doesn't return true or false
+    console.log('Hello ' + name);
 }
+
+greet('Barrett');
+greet(); // outputs Hello <Your name here>
+
+//The or operator's ( || ) special behavior is that if you pass to it two values that can be coerced to true and false, it will return the first one that converts to true. You still have to be careful with a zero ( 0 ) since it converts to false. 
