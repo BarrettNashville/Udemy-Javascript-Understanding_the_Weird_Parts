@@ -1,16 +1,17 @@
-// Primitive Type: A type of data that represents a single value.
-// Meaning... it's not an object. 
+//If you want to try to see what a non-number value becomes when it is converted to a number, you can use the Number() function...but only in the console window for debugging. He recommends not using it in the code. 
 
-// There are 6 primitive types in JavaScript: 
+Number(false)
 
-// Undefined: represents a lack of existence. Don't use. This is what JS sets all variables to in the creation phase.
+// returns 0
 
-// Null: represents a lack of existence. You can set a variable to this. 
+Number(true)
 
-// Boolean: true or false. 
+// returns 1
 
-// Number: only one numeric type. It's a floating point number meaning there are always some decimals attached to it. This can make math weird. 
+Number(undefined)
 
-// String: a sequence of characters. Both '' and "" can be used to surround a string.
+// returns NaN
 
-// Symbol: (new: used in ES6) We won't talk about this here. 
+Number(null)
+
+// returns 0
