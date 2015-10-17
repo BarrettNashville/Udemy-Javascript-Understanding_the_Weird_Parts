@@ -1,18 +1,5 @@
-function greet(name) {
-    console.log('Hello ' + name);
-}
+//If you are using two library files in your project, a lib1.js and a lib2.js and each has code that sets libraryName = "Lib1" or "Lib2", then the last one loaded wins. However, if you don't want to override a variable if it is already set, then you can use the or operator trick like so:
 
-greet('Barrett');
-greet(); // outputs Hello undefined
+window.libraryName = window.libraryName || "Lib 2";
 
-//ES6 allows you to set a default value. But old code uses this trick:
-
-function greet(name) {
-    name = name || '<Your name here>'; // this doesn't return true or false
-    console.log('Hello ' + name);
-}
-
-greet('Barrett');
-greet(); // outputs Hello <Your name here>
-
-//The or operator's ( || ) special behavior is that if you pass to it two values that can be coerced to true and false, it will return the first one that converts to true. You still have to be careful with a zero ( 0 ) since it converts to false. 
+// Usually libraries use very few global values, so if you load a library and can't use it, then you know you've probably overridden a variable name used in that library accidentally. 
