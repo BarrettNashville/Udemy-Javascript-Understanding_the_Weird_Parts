@@ -1,17 +1,31 @@
-//If you want to try to see what a non-number value becomes when it is converted to a number, you can use the Number() function...but only in the console window for debugging. He recommends not using it in the code. 
+//How can coersion be useful? Use these only in console.
 
-Number(false)
+Boolean(undefined)
+//false
 
-// returns 0
+Boolean(null)
+//false
 
-Number(true)
+Boolean("")
+//false
 
-// returns 1
+// Useful example:
 
-Number(undefined)
+var a;
 
-// returns NaN
+// goes to the Internet and looks for a value
 
-Number(null)
+if(a) {
+    console.log('Something is here');
+}
 
-// returns 0
+//
+
+Boolean(0)
+//false
+
+//If there is any chance the variable can become a 0, don't use this method. If that is the case though, you could use this if statement:
+
+if(a || a === 0) {
+    console.log('Something is here');
+}
