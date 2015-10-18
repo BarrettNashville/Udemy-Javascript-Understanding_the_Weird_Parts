@@ -1,16 +1,26 @@
-var greet = "Hello!";
-var greet = "Hola!";
+var objectLiteral = {
+    firstname: 'Mary',
+    isAProgrammer: true
+}
 
-console.log(greet);
+// JSON properties have to be wrapped in quotes
+// in actual JavaScript, you can do this but don't have to
+// JSON is technically a subset of object literal syntax
+// anything that is JSON-valid is valid OLS, but not all OLS is valid JSON
 
-var english = {};
-var spanish = {};
+/*
+{
+    "firstname": "Mary",
+    "isAProgrammer": true
+}
+*/
 
-english.greetings = {};
-english.greetings.greet = "Hello!";
-spanish.greet = "Hola!";
+// Built into JavaScript is a way to convert an object into JSON using JSON.stringify()
 
-// can't do this because greetings is undefined
-// english.greetings.greet = "Hello!";
+console.log(JSON.stringify(objectLiteral));
 
-console.log(english);
+// You can also do the reverse using JSON.parse()
+
+var jsonValue = JSON.parse('{"firstname": "Mary","isAProgrammer": true}');
+
+console.log(jsonValue);
