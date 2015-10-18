@@ -1,24 +1,16 @@
-var Barrett = { 
-    firstname:'Barrett', 
-    lastname:'Cunningham',
-    address:{
-        street: '123 Main St',
-        city: 'Nashville',
-        state: 'TN'
-    }
-};
+var greet = "Hello!";
+var greet = "Hola!";
 
-function greet(person) {
-    console.log('Hi ' + person.firstname);
-}
+console.log(greet);
 
-greet(Barrett);
+var english = {};
+var spanish = {};
 
-greet({ 
-    firstname: 'Mary', 
-    lastname: 'Doe' 
-});
+english.greetings = {};
+english.greetings.greet = "Hello!";
+spanish.greet = "Hola!";
 
-Barrett.address2 = {
-    street: '333 Second St.'
-}
+// can't do this because greetings is undefined
+// english.greetings.greet = "Hello!";
+
+console.log(english);
