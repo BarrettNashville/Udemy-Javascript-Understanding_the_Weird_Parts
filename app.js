@@ -1,13 +1,16 @@
-var greeting = 'Hola';
+function greet(whattosay) {
+    return function(name) {
+        console.log(whattosay + ' ' + name);
+    }
+}
 
-(function(global, name) {
-    var greeting = 'Hello';
-    global.greeting = 'Hello'
-    console.log(greeting + ' ' + name);  
-})(window, 'John');
+// invoking a function that returns a function, and then invoking the function that was returned
+greet('Hi')('Tony');
 
-console.log(greeting);
+// this still works when assigned to an intermediary variable
+// how does the sayHi function still know the whattosay variable
+// its possible because of closures
+var sayHi = greet('Hi');
+sayHi('Tony');
 
-// this is a way of intentionally overwriting the global "greeting" variable. You pass a reference to the gloabl object to your function and then overwrite the variable in there.
-
-
+// closure means the JS engine saves variables that would have otherwise been garbage disposed. 
