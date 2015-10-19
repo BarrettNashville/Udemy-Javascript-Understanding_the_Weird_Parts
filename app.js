@@ -1,23 +1,38 @@
-function makeGreeting(language) {
+function sayHiLater() {
+    var greeting = 'Hi';
     
-    return function greet(firstname, lastname) {
-        
-        if(language === 'en') {
-            console.log('Hello ' + firstname + ' ' + lastname);
-        }
-        
-        if(language === 'es') {
-            console.log('Hola ' + firstname + ' ' + lastname);
-        }   
-        
-    }
-    
+    setTimeout(function() {
+        console.log(greeting);
+    }, 3000);
 }
 
-var greetEnglish = makeGreeting('en');
-var greetSpanish = makeGreeting('es');
+sayHiLater();
 
-greetEnglish('John', 'Doe');
-greetSpanish('John', 'Doe');
+// sayHiLater has already been finished for 3 seconds when the anonymous callback function passed to setTimeout is triggered, but it still has access to the greeting variable set by sayHiLater
 
-// every time you call a function, you get a new execution context. so there are two different execution contexts for makeGreeting() and therefore two separate variables for the "language" prompt value
+// jQuery uses function expressions and first-class functions
+//$("button").click(function() {
+//    
+//});
+
+// callback function: I executed you, and you execute this other function for me when you're done. 
+// another definition: a function you give to another function, to be run when the other function is finished.
+// so the fucntion you call (invoke), 'calls back' by calling the function you gave it when it finishes
+
+// here is a more simplified example:
+
+function tellMeWhenDone(callback) {
+    var a = 1000; // some work
+    var b = 2000; // some more work
+    
+    callback(); // the 'callback', it runs the function i give it
+}
+
+tellMeWhenDone(function() {
+    console.log('I am done!');
+});
+
+tellMeWhenDone(function() {
+    alert('I am done!');
+});
+
