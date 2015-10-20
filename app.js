@@ -1,22 +1,49 @@
-// Dangerous aside about arrays and for...in...
+// Pure prototypal inheritance
 
-var arr = ['John', 'Jane', 'Jim'];
-
-for(var prop in arr) {
-    console.log(prop + ': ' + arr[prop]);
+var person = {
+    firstname: 'Default',
+    lastname: 'Default',
+    greet: function() {
+        return 'Hi ' + this.firstname; 
+        // have to use "this" above; otherwise would look in the greet function context, not find it and look in the global context
+    }
 }
 
-// arrays in JS are a little different than they are in other languages
-// arrays have name/value pairs. there are 3 properties on the array above. but this causes a problem if a framework adds features to the prototype of Arrays.
+var john = Object.create(person);
+// Object.create() creates an empty object with its prototype pointing at whatever you passed in
+console.log(john);
 
-console.log('---------');
+/*
+john.greet()
+"Hi Default"
+*/
 
-Array.prototype.myCustomFeature = 'cool!';
+// the pattern then is that you override whatever you want to by simply adding the properties and methods yourself to the created object
 
-var arr2 = ['John', 'Jane', 'Jim'];
+john.firstname = 'John';
+john.lastname = 'Doe';
 
-for(var prop in arr2) {
-    console.log(prop + ': ' + arr2[prop]);
+console.log(john);
+/*
+john.greet()
+"Hi John"
+*/
+
+//this is pure prototypal inheritance
+//its very powerful because you can mutate the prototype along the way
+//you can add features you might need for specific use cases, for instance
+//Object.create() is a newer thing that modern browsers are implementing
+//for older browsers, you can use polyfill: code that adds a feature which the engine may lack
+
+// polyfill
+if(!Object.create) {
+    Object.create = function(o) { // this line adds "create" to the global object 
+        if(arguments.length > 1) {
+            throw new Error('Object.create implementation'
+            + ' only accepts the first parameter.');
+        }
+        function F() {}
+        F.prototype = o;
+        return new F();
+    };
 }
-
-// in the case of arrays, DON'T use for...in... . Use instead, the standard for(var i = 0; i < arr.length; i++) syntax
