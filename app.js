@@ -1,33 +1,53 @@
-// inheritance: one object gets access to the properties and methods of another object
-// classical inheritance: whats in C#, Java, etc. negatives: it is verbose. 
-// prototypal inheritance: simple, flexible, extensible, easy to understand
+// reflection: an object can look at itself, listing and changing its properties and methods
 
-// All objects (including functions) have a prototype property. Its simply a reference to another object we'll call proto. It stands alone, you could use it by itself if you wanted to. The prototype object can also have its own prototype. This is the Prototype Chain. 
-// Different objects can share the same prototype if you want them to. 
-
-var person = { 
-    firstname: 'Default',
+var person = {
+    firstname:'Default',
     lastname: 'Default',
     getFullName: function() {
         return this.firstname + ' ' + this.lastname;
-        // "this" refers to whatever object originated the call. john in the case below.
     }
 }
 
-var john = { 
+var john = {
     firstname: 'John',
     lastname: 'Doe'
 }
 
-//lets do it wrong first, don't ever do this because modern browsers do provide a way to directly access the prototype but this can cause a performance problem. 
-
+// don't assign __proto__ to anything ever. for demo purposes only.
 john.__proto__ = person;
-console.log(john.getFullName());
-console.log(john.firstname);
 
-var jane = {
-    firstname: 'Jane'
+// example of reflection in JS
+
+// see all members available to an object
+for( var prop in john) {
+    console.log(prop + ': ' + john[prop])
 }
 
-jane.__proto__ = person;
-console.log(jane.getFullName());
+// see john's members only
+for( var prop in john) {
+    if(john.hasOwnProperty(prop)){
+        console.log(prop + ': ' + john[prop]);
+    }
+}
+
+// extend
+
+var jane = {
+    address: '111 Main St.',
+    getFormalFullName: function() {
+        return this.lastname + ', ' + this.firstname;
+    }
+}
+
+var jim = {
+    getFirstName: function() {
+        return firstname;
+    }
+}
+
+// combines all the properties of jane and jim to john
+_.extend(john, jane, jim)
+
+console.log(john);
+
+// he jumps into the underscore.js source code and explains how the extend() method works
