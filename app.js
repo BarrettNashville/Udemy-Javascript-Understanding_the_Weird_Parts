@@ -1,49 +1,40 @@
-// Pure prototypal inheritance
+// ES6 has a new concept coming to create objects and set prototype: classes
+// this is what a class looks like in ES6:
 
-var person = {
-    firstname: 'Default',
-    lastname: 'Default',
-    greet: function() {
-        return 'Hi ' + this.firstname; 
-        // have to use "this" above; otherwise would look in the greet function context, not find it and look in the global context
+"use strict"
+
+class Person {
+    
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    
+    greet() {
+        return 'Hi ' + this.firstname;
     }
 }
 
-var john = Object.create(person);
-// Object.create() creates an empty object with its prototype pointing at whatever you passed in
-console.log(john);
+var john = new Person('John', 'Doe');
+console.log(john.greet());
 
-/*
-john.greet()
-"Hi Default"
-*/
+// class is not an object in most other languages. in JS, Person here is an object.
+// the author doesn't use this syntax. I believe he likes Object.create() better.
 
-// the pattern then is that you override whatever you want to by simply adding the properties and methods yourself to the created object
+// using the class syntax, you set the prototype like so:
 
-john.firstname = 'John';
-john.lastname = 'Doe';
-
-console.log(john);
-/*
-john.greet()
-"Hi John"
-*/
-
-//this is pure prototypal inheritance
-//its very powerful because you can mutate the prototype along the way
-//you can add features you might need for specific use cases, for instance
-//Object.create() is a newer thing that modern browsers are implementing
-//for older browsers, you can use polyfill: code that adds a feature which the engine may lack
-
-// polyfill
-if(!Object.create) {
-    Object.create = function(o) { // this line adds "create" to the global object 
-        if(arguments.length > 1) {
-            throw new Error('Object.create implementation'
-            + ' only accepts the first parameter.');
+class InformalPerson extends Person { // extends sets the prototype (__proto__)
+        
+        constructor(firstname, lastname) {
+            super(firstname, lastname);
         }
-        function F() {}
-        F.prototype = o;
-        return new F();
-    };
+        
+        greet() {
+            return 'Yo ' + this.firstname;
+        }
 }
+
+var jane = new InformalPerson('Jane', 'Doe');
+console.log(jane.greet());
+
+// class is just syntactic sugar, it doesn't do anything different
