@@ -1,27 +1,43 @@
-// first way of building objects: 
-// function constructors and the keyword "new"
-
-function Person(firstname, lastname) { // parameters are optional
+function Person(firstname, lastname) { 
     
-    console.log(this); // the empty object created by "new"
-    this.firstname = firstname; //'John';
-    this.lastname = lastname; //'Doe';
+    console.log(this); 
+    this.firstname = firstname; 
+    this.lastname = lastname; 
     console.log('This function is invoked.');
     
-    // can break this process by returning something
-    // return { greeting: 'i got in the way'};
 }
-// a function used specifically to construct an object is called a function constructor
 
-// new is just an operator
-// it creates an empty object first, then it calls the Person() function
-// the new keyword changes what the this variable points to; it points to the new empty object. 
-// as long as the Person() function doesn't return a value, the JS engine will return the object created by the new operator
-var john = new Person('John', 'Doe') //new Person();
+var john = new Person('John', 'Doe')
 console.log(john);
 
-// you can create as many Persons() as you want, but they all have the same property values. Each time a constructor is called, a new empty object is created
-var jane = new Person('Jane', 'Doe') //new Person();
+var jane = new Person('Jane', 'Doe')
 console.log(jane);
 
-// function constructor: a normal function that is used to construct objects. The 'this' variable points to a new empty object, and that object is returned from the function automatically (as long as you don't return anything from the function)
+// how do we set the prototype? well, when you use the function constructor, it sets the prototype for you.
+// john.__proto__ returns Person {}
+// any time you create a function object, they all get a prototype member. It is used ONLY by the new operator. It is only used when you are using a function as a function constructor
+
+// The prototype property on a function is not the prototype OF the function, its the prototype of any objects created if you're using the function as a function constructor
+// It starts its life as an empty object
+
+Person.prototype.getFullName = function() {
+    return this.firstname + ' ' + this.lastname;
+}
+
+// this prototype property of all functions is where the prototype chain points for any objects created using that function as a constructor
+
+// you can add members to the prototype of the FUNCTION on the fly later after any objects have been created by that function constructor, and all those created objects will have access to that new member immediately
+
+// this means you can add features to ALL objects created by a function constructor at once AFTER they have already been created 
+
+Person.prototype.getFormalFullName = function() {
+    return this.lastname + ' ' + this.firstname;
+}
+
+console.log(john.getFormalFullName());
+
+// in a lot of good JS libraries, properties are set up inside function constructors but methods are sitting on the prototype
+// why not add methods inside function constructor
+// anything added to objects take up memory space
+// every copy gets a copy of the function unless you add it to the prototype
+// each object will have different values, and thus will need different copies, of each property. but they will ALL use the SAME copy of each method
