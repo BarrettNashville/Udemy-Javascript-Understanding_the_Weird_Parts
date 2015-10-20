@@ -1,53 +1,27 @@
-// reflection: an object can look at itself, listing and changing its properties and methods
+// first way of building objects: 
+// function constructors and the keyword "new"
 
-var person = {
-    firstname:'Default',
-    lastname: 'Default',
-    getFullName: function() {
-        return this.firstname + ' ' + this.lastname;
-    }
+function Person(firstname, lastname) { // parameters are optional
+    
+    console.log(this); // the empty object created by "new"
+    this.firstname = firstname; //'John';
+    this.lastname = lastname; //'Doe';
+    console.log('This function is invoked.');
+    
+    // can break this process by returning something
+    // return { greeting: 'i got in the way'};
 }
+// a function used specifically to construct an object is called a function constructor
 
-var john = {
-    firstname: 'John',
-    lastname: 'Doe'
-}
-
-// don't assign __proto__ to anything ever. for demo purposes only.
-john.__proto__ = person;
-
-// example of reflection in JS
-
-// see all members available to an object
-for( var prop in john) {
-    console.log(prop + ': ' + john[prop])
-}
-
-// see john's members only
-for( var prop in john) {
-    if(john.hasOwnProperty(prop)){
-        console.log(prop + ': ' + john[prop]);
-    }
-}
-
-// extend
-
-var jane = {
-    address: '111 Main St.',
-    getFormalFullName: function() {
-        return this.lastname + ', ' + this.firstname;
-    }
-}
-
-var jim = {
-    getFirstName: function() {
-        return firstname;
-    }
-}
-
-// combines all the properties of jane and jim to john
-_.extend(john, jane, jim)
-
+// new is just an operator
+// it creates an empty object first, then it calls the Person() function
+// the new keyword changes what the this variable points to; it points to the new empty object. 
+// as long as the Person() function doesn't return a value, the JS engine will return the object created by the new operator
+var john = new Person('John', 'Doe') //new Person();
 console.log(john);
 
-// he jumps into the underscore.js source code and explains how the extend() method works
+// you can create as many Persons() as you want, but they all have the same property values. Each time a constructor is called, a new empty object is created
+var jane = new Person('Jane', 'Doe') //new Person();
+console.log(jane);
+
+// function constructor: a normal function that is used to construct objects. The 'this' variable points to a new empty object, and that object is returned from the function automatically (as long as you don't return anything from the function)
