@@ -1,29 +1,8 @@
-var a = 3;
-console.log(typeof a); // lowercase "number" output, not "Number" which is an object
+"use strict"; 
+// it can also be scoped to just a function if you want, instead of being global
+// be a little wary of this because if multiple files are minified together and the first file has "use strict"; then all the files will be affected
 
-var b = "Hello";
-console.log(typeof b); // string
+var person;
 
-var c = {};
-console.log(typeof c); // object
-
-var d = [];
-console.log(typeof d); // weird! returns "object"
-console.log(d.toString());  // returns an empty string "" because it tries to convert the contents of the array
-console.log(Object.prototype.toString.call(d)); // better!
-// .call() means: invoke this function but tell it what the "this" variable should point to
-
-function Person(name) {
-    this.name = name;
-}
-
-var e = new Person('Jane');
-console.log(typeof e); // object
-console.log(e instanceof Person); // going down the prototype chain of e, do you find "Person"? yes
-
-console.log(typeof undefined); // makes sense
-console.log(typeof null); // a bug since, like, forever...
-
-var z = function() { };
-console.log(typeof z);
-
+persom = {};
+console.log(persom);
