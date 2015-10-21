@@ -1,6 +1,6 @@
-// method chainging: calling one method after another, and each method affects the parent object. 
-// So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
+// We're going to build a library/framework called GREETR. 
+// When given a first name, last name, and optional language, it generates formal and informal greetings. 
+// We want to support English and Spanish languages. 
+// We want an easy-to-type structure
+// Should also support jQuery. Give it jQuery object and it will fill that object with the greeting. 
 
-// the only thing you have to do to make methods chainable is to "return this;"
-var q = $("ul.people").addClass("newclass").removeClass("people");
-console.log(q);
