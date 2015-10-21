@@ -1,8 +1,6 @@
-"use strict"; 
-// it can also be scoped to just a function if you want, instead of being global
-// be a little wary of this because if multiple files are minified together and the first file has "use strict"; then all the files will be affected
+// method chainging: calling one method after another, and each method affects the parent object. 
+// So obj.method1().method2() where both methods end up with a 'this' variable pointing at 'obj'
 
-var person;
-
-persom = {};
-console.log(persom);
+// the only thing you have to do to make methods chainable is to "return this;"
+var q = $("ul.people").addClass("newclass").removeClass("people");
+console.log(q);
