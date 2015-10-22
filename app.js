@@ -1,17 +1,5 @@
-// gets a new object
-var g = G$('John', 'Doe');
+// Transpile: convert the syntax of one programming language to another. 
+// In this case, languages that don't really ever run anywhere, but instead are processed by 'transpilers' that generate javascript
 
-// use our chainable methods
-//g.greet().setLang('es').greet(true).log();
-
-// let's use our object on the click of the login button
-$('#login').click(function() {
-
-    // create a new 'Greetr' object (let's pretend we know the name from the login)
-    var loginGreetr = G$('John', 'Doe');
-    
-    $('#logindiv').hide();
-    
-    // fire off an HTML greeting, passing the '#greeting' as the selector and the chosen language, and log the welcome as well
-    loginGreetr.setLang($('#lang').val()).HTMLGreeting('#greeting', true).log();
-});
+// TypeScript, from Microsoft, is one example of a transpiler
+// Traceur is another one. It lets you use ES6 even though its not released yet.
