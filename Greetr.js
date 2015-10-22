@@ -1,12 +1,14 @@
-(function(global, $) {
+// we can put a semicolon here in case another JS library loaded prior to this one doesn't close out all of its semicolons properly
+;(function(global, $) {
     
+    // 'new' an object
     var Greetr = function(firstName, lastName, language) {
         
         // return an object created by a call to a constructor so that you don't have to use the "new" keyword everytime you invoke Greetr
         return new Greetr.init(firstName, lastName, language);
     }
     
-    // set up internal array
+    // set up internal array hidden within the scope of the IIFE and never directly accessible
     var supportedLangs = ['en', 'es'];
     
     // we're using objects for greeting instead of arrays so we can reference them like so: greetigns['en']    
@@ -81,6 +83,30 @@
             this.validate();
             
             return this;
+        },
+        
+        //integrate jQuery by passing a jQuery-style selector to this function
+        HTMLGreeting: function(selector, formal) {
+            if(!$) {
+                throw 'jQuery not loaded';
+            }
+            
+            if(!selector) {
+                throw 'Missing jQuery selector';
+            }
+            
+            var msg;
+            if(formal) {
+                msg = this.formalGreeting();
+            }
+            else {
+                msg = this.greeting();
+            }
+            
+            // should probably add error checking on selector variable here eventually
+            $(selector).html(msg);
+            
+            return this;
         }
         
     };
@@ -93,6 +119,8 @@
         self.firstName = firstName || '';
         self.lastName = lastName || '';
         self.language = language || 'en';
+        
+        self.validate();
     }
     
     // now each object created with the Greetr.init constructor function has a prototype that points the same prototype: Greetr.prototype. Otherwise, each object created by the Greetr.init constructor would get its own unique prototype object
